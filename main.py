@@ -18,17 +18,16 @@ from BDFacade import DBFacade
 
 def baixarDataSet():
     options = webdriver.ChromeOptions()
-    options.add_argument("--headless")
     driver = webdriver.Chrome(options=options, service=ChromeService(ChromeDriverManager().install()))
     driver.get(
         "https://www.kaggle.com/datasets/thedevastator/global-fossil-co2-emissions-by-country-2002-2022?resource=download")
 
-    time.sleep(10)
+    time.sleep(3)
 
     btnDownload = driver.find_element(By.XPATH, "//a[@data-disable-rapidash='true']")
     btnDownload.click()
     wait = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//*[text()='Sign in with Email']")))
-    time.sleep(5)
+    time.sleep(2)
 
     btnLoginEmail = (driver.find_element(By.XPATH, "//*[text()='Sign in with Email']"))
     btnLoginEmail.click()
@@ -53,7 +52,7 @@ def baixarDataSet():
                                                 "-2022/download')]")
     btnDownload.click()
 
-    time.sleep(10)
+    time.sleep(4)
     extractZip()
 
 
@@ -74,13 +73,16 @@ def leituraArquivo():
 
     db = DBFacade()
     qtdRegistrosBD = db.quantidadeRegistro()
+    print(qtdRegistrosBD)
 
     if len(arquivoCsv) > qtdRegistrosBD:
         db.atualizarNumeros(json_object)
+        print(json_object)
 
     with open("sample.json", "w") as outfile:
         outfile.write(json_object)
 
+    print("Dados atualizados com sucesso!")
 
 def main():
     print("Iniciando o processo de extração de dados...")

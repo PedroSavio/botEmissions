@@ -5,6 +5,7 @@ import zipfile
 
 import pandas as pd
 
+from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 
 from selenium import webdriver
@@ -18,7 +19,7 @@ from BDFacade import DBFacade
 def baixarDataSet():
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")
-    driver = webdriver.Chrome(options=options)
+    driver = webdriver.Chrome(options=options, service=ChromeService(ChromeDriverManager().install()))
     driver.get(
         "https://www.kaggle.com/datasets/thedevastator/global-fossil-co2-emissions-by-country-2002-2022?resource=download")
 

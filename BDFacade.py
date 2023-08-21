@@ -4,7 +4,7 @@ import pymysql
 class DBFacade:
 
     def conectar(self, autocommit=False):
-        return pymysql.connect(host='68.183.18.153', user='aluno', passwd='webglauco', db='project_web',
+        return pymysql.connect(host='web-glauco.chu2ke6ozp1k.us-east-1.rds.amazonaws.com', user='aluno', passwd='webglauco', db='project_web',
                                autocommit=autocommit)
 
     def atualizarNumeros(self, objeto):

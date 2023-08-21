@@ -1,5 +1,4 @@
 import pymysql
-import datetime
 
 
 class DBFacade:
